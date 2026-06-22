@@ -24,8 +24,14 @@ The engine translates the 2D world map into 3D projection on every frame through
 
 ### 1. Vector Projection & Intersection
 For each vertical column on the screen, a ray is cast at an angle ($\theta$). The algorithm calculates grid crossings dynamically:
-$$\text{depth\_hor} = \frac{y_{\text{hor}} - o_y}{\sin(\theta)}$$
-$$\text{depth\_vert} = \frac{x_{\text{vert}} - o_x}{\cos(\theta)}$$
+
+$$
+\text{depth\_hor} = \frac{y_{\text{hor}} - o_y}{\sin(\theta)}
+$$
+
+$$
+\text{depth\_vert} = \frac{x_{\text{vert}} - o_x}{\cos(\theta)}
+$$
 
 ### 2. Lens Distortion Correction
 To keep flat walls looking straight instead of curved, the raw depth is multiplied by the cosine of the relative angle:
