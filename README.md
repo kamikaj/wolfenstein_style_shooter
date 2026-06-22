@@ -18,21 +18,22 @@ This repository showcases the practical application of game physics, trigonometr
 
 ---
 
-## 📐 The Math Under the Hood: How It Works
-
-The engine translates the 2D world map into 3D projection on every frame through the following sequence:
-
 ### 1. Vector Projection & Intersection
 For each vertical column on the screen, a ray is cast at an angle ($\theta$). The algorithm calculates grid crossings dynamically:
 
 $$
-\text{depth\_hor} = \frac{y_{\text{hor}} - o_y}{\sin(\theta)}
+d_{\text{hor}} = \frac{y_{\text{hor}} - o_y}{\sin(\theta)}
 $$
 
 $$
-\text{depth\_vert} = \frac{x_{\text{vert}} - o_x}{\cos(\theta)}
+d_{\text{vert}} = \frac{x_{\text{vert}} - o_x}{\cos(\theta)}
 $$
 
+Where:
+* $d_{\text{hor}}$ / $d_{\text{vert}}$ = Calculated distance to the nearest horizontal / vertical wall intersection.
+* $o_x$ / $o_y$ = Current player coordinates (origin of the ray).
+* $x_{\text{vert}}$ / $y_{\text{hor}}$ = Coordinates of the closest grid line.
+  
 ### 2. Lens Distortion Correction
 To keep flat walls looking straight instead of curved, the raw depth is multiplied by the cosine of the relative angle:
 $$\text{Corrected Depth} = \text{Raw Depth} \times \cos(\text{Player Angle} - \text{Ray Angle})$$
